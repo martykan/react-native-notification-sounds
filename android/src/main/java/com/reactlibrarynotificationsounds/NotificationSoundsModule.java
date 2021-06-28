@@ -59,17 +59,17 @@ public class NotificationSoundsModule extends ReactContextBaseJavaModule {
         manager.setType(ringtoneManagerType);
         Cursor cursor = manager.getCursor();
         WritableArray list = Arguments.createArray();
-      Uri defautNotification=RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Log.v(defautNotification.getEncodedPath(), "String");
+     
         while (cursor.moveToNext()) {
             String notificationTitle = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX);
             String notificationUri = cursor.getString(RingtoneManager.URI_COLUMN_INDEX);
             String id = cursor.getString(RingtoneManager.ID_COLUMN_INDEX);
-
+            String actualUri = manager.getRingtoneUri(cursor.getPosition()).toString();
             WritableMap newSound = Arguments.createMap();
             newSound.putString("title", notificationTitle);
             newSound.putString("url", notificationUri + "/" + id );
             newSound.putString("soundID", id );
+            newSound.putString("actualURI",actualUri);
 
             list.pushMap(newSound);
             Log.d("getNotifications: ", notificationUri + id);
@@ -93,6 +93,13 @@ public class NotificationSoundsModule extends ReactContextBaseJavaModule {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @ReactMethod
+    public void getDefaultSound(final Promise promise){
+            Uri defautNotification=RingtoneManager.getActualDefaultRingtoneUri(this.reactContext,RingtoneManager.TYPE_NOTIFICATION);
+           String notification =  defautNotification.toString();
+        promise.resolve(notification);
     }
 
     @ReactMethod
