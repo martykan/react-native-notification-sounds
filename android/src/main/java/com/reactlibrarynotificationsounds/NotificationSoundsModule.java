@@ -59,7 +59,8 @@ public class NotificationSoundsModule extends ReactContextBaseJavaModule {
         manager.setType(ringtoneManagerType);
         Cursor cursor = manager.getCursor();
         WritableArray list = Arguments.createArray();
-
+      Uri defautNotification=RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Log.v(defautNotification.getEncodedPath(), "String");
         while (cursor.moveToNext()) {
             String notificationTitle = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX);
             String notificationUri = cursor.getString(RingtoneManager.URI_COLUMN_INDEX);
