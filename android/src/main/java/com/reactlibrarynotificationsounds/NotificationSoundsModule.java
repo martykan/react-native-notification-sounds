@@ -98,8 +98,9 @@ public class NotificationSoundsModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getDefaultSound(final Promise promise){
             Uri defautNotification=RingtoneManager.getActualDefaultRingtoneUri(this.reactContext,RingtoneManager.TYPE_NOTIFICATION);
-           String notification =  defautNotification.toString();
-        promise.resolve(notification);
+         String result = java.net.URLDecoder.decode(String.valueOf(defautNotification), StandardCharsets.UTF_8.name());
+        String notification =  defautNotification.toString();
+        promise.resolve(result);
     }
 
     @ReactMethod
