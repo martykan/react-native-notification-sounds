@@ -17,6 +17,7 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import java.nio.charset.StandardCharsets;
+import java.io.UnsupportedEncodingException;
 
 import java.util.HashMap;
 import java.util.Map;
