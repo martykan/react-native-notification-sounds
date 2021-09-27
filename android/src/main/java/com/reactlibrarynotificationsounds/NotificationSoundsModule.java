@@ -98,11 +98,14 @@ public class NotificationSoundsModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void getDefaultSound(final Promise promise) throws UnsupportedEncodingException{
-            Uri defautNotification=RingtoneManager.getActualDefaultRingtoneUri(this.reactContext,RingtoneManager.TYPE_NOTIFICATION);
-         String result = java.net.URLDecoder.decode(String.valueOf(defautNotification), StandardCharsets.UTF_8.name());
-        String notification =  defautNotification.toString();
-        promise.resolve(result);
+    public void getDefaultSound(final Promise promise) {
+        try { 
+            Uri defautNotification = RingtoneManager.getActualDefaultRingtoneUri(this.reactContext, RingtoneManager.TYPE_NOTIFICATION);
+            String result = java.net.URLDecoder.decode(String.valueOf(defautNotification), StandardCharsets.UTF_8.name());
+            promise.resolve(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @ReactMethod
