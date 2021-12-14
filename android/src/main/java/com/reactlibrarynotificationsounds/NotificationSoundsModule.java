@@ -100,7 +100,7 @@ public class NotificationSoundsModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getDefaultSound(final Promise promise) {
         try { 
-            Uri defautNotification = RingtoneManager.getActualDefaultRingtoneUri(this.reactContext, RingtoneManager.TYPE_NOTIFICATION);
+            Uri defautNotification = RingtoneManager.getActualDefaultRingtoneUri(this.reactContext, RingtoneManager.TYPE_RINGTONE);
             String result = java.net.URLDecoder.decode(String.valueOf(defautNotification), StandardCharsets.UTF_8.name());
             promise.resolve(result);
         } catch (Exception e) {
